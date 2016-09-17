@@ -1,0 +1,30 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "Fake retail backend to demo mySQL and node.js ability to work together",
+  "main": "customer.js",
+  "scripts": {
+    "test": "Use either customer.js, manager.js or executive.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geowitt/bamazon.git"
+  },
+  "keywords": [
+    "bamazon",
+    "store",
+    "HW"
+  ],
+  "author": "GTW",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/geowitt/bamazon/issues"
+  },
+  "homepage": "https://github.com/geowitt/bamazon#readme",
+  "dependencies": {
+    "cli-table": "^0.3.1",
+    "inquirer": "^1.1.3",
+    "mysql": "^2.11.1",
+    "mysql-active-record": "^1.2.3"
+  }
+}

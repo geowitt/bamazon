@@ -13,6 +13,7 @@
         password: 'root',
         database: 'bamazon'
     });
+
     //Provides status of SQL connection
     connection.connect(function(err) {
         if (err) throw err;
@@ -24,7 +25,7 @@
     console.log('Welcome to the Bamazon Manager Interface');
     console.log('------------------------------------------------\n');
 
-    //builds startup menu for management interface
+    //Builds startup menu for management interface
     var appStart = function() {
         inquirer.prompt([{
             name: "Menu",
@@ -33,7 +34,7 @@
             choices:['View Products for Sale', 'View Low Inventory', 'Add to Inventory', 'Add New Product', 'Exit']
         }]).then(function(answer) {
 
-            // switch for different options
+            //Switch for different options
 
             switch(answer.Menu) {
                 case 'View Products for Sale':
@@ -52,10 +53,11 @@
                     connection.end();
                     break;
             }
-            // end of switch
+            //End of switch
 
-        }); // end of inquirer prompt function
+        });//End of inquirer prompt function
     }
+
     //Function to prompt user if they want to continue or end connection
     function appContinue() {
         inquirer.prompt({
@@ -66,7 +68,7 @@
             if (answer.continue == true) {
                 appStart();
             } else {
-                console.log("Ending session with Bamazon Manager!");
+                console.log("Ending session with Bamazon Manager Interface!");
                 connection.end();
             }
         });
@@ -78,6 +80,7 @@
             console.log('---------------------------------');
             console.log('Bamazon Merchandise List');
             console.log('---------------------------------\n');
+
             // New Table instance to format returned sql data
             var table = new Table({
                 head: ['ItemID', 'ProductName', 'Price', 'Quantity'],
@@ -97,6 +100,7 @@
             console.log('---------------------------------');
             console.log('Bamazon Merchandise - Low Inventory');
             console.log('---------------------------------\n');
+
             // New Table instance to format returned sql data
             var table = new Table({
                 head: ['ItemID', 'ProductName', 'Price', 'Quantity'],
@@ -112,6 +116,7 @@
             appStart();
         });
     }
+
     //Function to add inventory to database
     function addInventory() {
         connection.query('SELECT * FROM Products', function(err, res) {
@@ -138,6 +143,7 @@
             message: 'Enter the quantity you want to add to inventory'
         }]).then(function(answer) {
             var addAmount = (parseInt(answer.qty));
+
             //Queries the database to retrieve the current StockQuantity to perform the addition
             connection.query("SELECT * FROM Products WHERE ?", [{ItemID: answer.ItemID}], function(err, res) {
                 if(err) {
@@ -145,6 +151,7 @@
                 } else {
                     var updateQty = (parseInt(res[0].StockQuantity) + addAmount);
                 }
+
                 //Updates the database with new quantity
                 connection.query('UPDATE products SET StockQuantity = ? WHERE ItemID = ?', [updateQty, answer.ItemID], function(err, results) {
                     if(err) {
@@ -161,6 +168,7 @@
 
         });
     }
+
     //Add a new product to the database
     function newProduct() {
         inquirer.prompt([{

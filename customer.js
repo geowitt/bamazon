@@ -28,7 +28,7 @@
             console.log('Available Bamazon Products');
             console.log('---------------------------------');
 
-            // New Table instance to format returned sql data
+            //New Table instance to format returned sql data
             var table = new Table({
                 head: ['ItemID', 'ProductName', 'Price', 'Quantity'],
                 colWidths: [10, 40, 10, 10]
@@ -88,7 +88,7 @@
                     start();
                 } else {
 
-                    //if quantity exists updates database
+                    //If quantity exists updates database
                     var updateQty = data[0].StockQuantity - ItemInt;
                     var totalPrice = data[0].Price * ItemInt;
                     connection.query('UPDATE products SET StockQuantity = ? WHERE ItemID = ?', [updateQty, answer.Item], function(err, results) {
